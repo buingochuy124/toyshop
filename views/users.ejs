@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <%
+    
+    if (userData.rowCount == 0)
+    {
+    %>  
+    <p>No data found</p>
+    <%  
+    } else {
+      // Display table header
+    %> 
+    <div class="container">
+        <h2>Product Manager</h2>
+        <a href='users/insert' class="btn btn-success float-right">Add Product</a>
+        <br>
+        <br>
+        <br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Shop name</th>
+                    <th>Product Amount</th>
+                    <th>Product Price</th>
+                    <th>Product image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <%  
+      
+      userData.rows.forEach( function(row) {
+       
+        console.log(row);
+    %>
+            <tr>
+                <td><%= row.product_name %></td>
+                <td><%= row.shop_name %></td>
+                <td><%= row.amount %></td>
+                <td><%= row.price %></td>
+                <td>
+                    <img src='<%= row.url %>' width="30" height="40">
+                </td>
+                <td>
+                 <a href='users/edit/<%= row.product_name%>'>Edit</a> 
+                </td>
+                <td>
+                    <a href='users/delete/<%=row.product_id%>'>Delete</a> 
+                </td>
+            </tr>
+            <%
+        });
+      %>
+        </table>
+        
+    </div>
+    <%
+}
+ %>
+</body>
+
+</html>
